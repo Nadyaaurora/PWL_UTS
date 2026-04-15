@@ -17,6 +17,10 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'm_user';
+    protected $primaryKey = 'user_id';
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'email',
@@ -32,6 +36,21 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id', 'level_id');
+    }
+
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class, 'user_id', 'user_id');
+    }
+
+    public function stok()
+    {
+        return $this->hasMany(Stok::class, 'user_id', 'user_id');
+    }
 
     /**
      * Get the attributes that should be cast.
