@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('m_user', function (Blueprint $table) {
             $table->id('user_id');
-            $table->foreignId('level_id')->constrained('m_level');
+            $table->unsignedBigInteger('level_id');
+            $table->foreign('level_id')
+                ->references('level_id')
+                ->on('m_level');
             $table->string('username', 20);
             $table->string('nama', 100);
             $table->string('password', 255);

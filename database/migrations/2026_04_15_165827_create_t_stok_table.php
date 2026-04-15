@@ -13,9 +13,21 @@ return new class extends Migration
     {
         Schema::create('t_stok', function (Blueprint $table) {
             $table->id('stok_id');
-            $table->foreignId('supplier_id')->constrained('m_supplier');
-            $table->foreignId('barang_id')->constrained('m_barang');
-            $table->foreignId('user_id')->constrained('m_user');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('barang_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('supplier_id')
+                ->references('supplier_id')
+                ->on('m_supplier');
+
+            $table->foreign('barang_id')
+                ->references('barang_id')
+                ->on('m_barang');
+
+            $table->foreign('user_id')
+                ->references('user_id')
+                ->on('m_user');
             $table->dateTime('stok_tanggal');
             $table->integer('stok_jumlah');
         });

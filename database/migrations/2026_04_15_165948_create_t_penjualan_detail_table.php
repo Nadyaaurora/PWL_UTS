@@ -13,10 +13,20 @@ return new class extends Migration
     {
         Schema::create('t_penjualan_detail', function (Blueprint $table) {
             $table->id('detail_id');
-            $table->foreignId('penjualan_id')->constrained('t_penjualan');
-            $table->foreignId('barang_id')->constrained('m_barang');
+
+            $table->unsignedBigInteger('penjualan_id');
+            $table->unsignedBigInteger('barang_id');
+
             $table->integer('harga');
             $table->integer('jumlah');
+
+            $table->foreign('penjualan_id')
+                ->references('penjualan_id')
+                ->on('t_penjualan');
+
+            $table->foreign('barang_id')
+                ->references('barang_id')
+                ->on('m_barang');
         });
     }
 
