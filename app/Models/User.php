@@ -22,7 +22,9 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
+        'level_id',
+        'username',
+        'nama',
         'email',
         'password',
     ];
@@ -63,5 +65,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function getNameAttribute()
+    {
+        return $this->nama;
     }
 }
