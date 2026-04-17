@@ -15,7 +15,7 @@ class PenjualansTable
         return $table
             ->columns([
                 TextColumn::make('user.nama')
-                    ->label('User'),
+                    ->label('Kasir'),
 
                 TextColumn::make('pembeli')
                     ->label('Pembeli'),
@@ -25,6 +25,15 @@ class PenjualansTable
 
                 TextColumn::make('penjualan_tanggal')
                     ->label('Tanggal'),
+                    
+                TextColumn::make('total')
+                    ->label('Total')
+                    ->getStateUsing(function ($record) {
+                        return $record->penjualanDetail->sum(function ($item) {
+                            return $item->harga * $item->jumlah;
+                        });
+                    })
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
             ])
             ->filters([
                 //

@@ -59,9 +59,15 @@ class PenjualanDetailRelationManager extends RelationManager
                 TextColumn::make('barang.barang_nama')
                     ->label('Barang'),
                 TextColumn::make('harga')
-                    ->label('Harga'),
+                    ->label('Harga')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
                 TextColumn::make('jumlah')
-                    ->label('Jumlah'),
+                    ->label('Jumlah')
+                    ->numeric(),
+                TextColumn::make('subtotal')
+                    ->label('Subtotal')
+                    ->getStateUsing(fn ($record) => $record->harga * $record->jumlah)
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
             ])
             ->filters([
                 //

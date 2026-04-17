@@ -31,13 +31,16 @@ class BarangsTable
 
                 TextColumn::make('harga_beli')
                     ->label('Harga Beli')
-                    ->money('IDR')
-                    ->color('success'),
+                    ->money('IDR', true)
+                    ->color('success')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
 
                 TextColumn::make('harga_jual')
                     ->label('Harga Jual')
                     ->money('IDR')
-                    ->color('warning'),
+                    ->color('warning')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
+
             ])
             ->filters([
                 //
