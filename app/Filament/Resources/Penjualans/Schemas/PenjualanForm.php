@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Penjualans\Schemas;
 
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 
 class PenjualanForm
@@ -18,13 +18,16 @@ class PenjualanForm
                 ->relationship('user', 'nama')
                 ->required(),
 
-            DatePicker::make('tanggal')
-                ->label('Tanggal')
+            TextInput::make('pembeli')
+                ->label('Nama Pembeli')
                 ->required(),
 
-            TextInput::make('total_harga')
-                ->label('Total Harga')
-                ->numeric()
+            TextInput::make('penjualan_kode')
+                ->label('Kode Penjualan')
+                ->required(),
+
+            DateTimePicker::make('penjualan_tanggal')
+                ->label('Tanggal Penjualan')
                 ->required(),
             ]);
     }

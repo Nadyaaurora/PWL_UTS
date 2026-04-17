@@ -14,21 +14,17 @@ class PenjualansTable
     {
         return $table
             ->columns([
-                TextColumn::make('penjualan_id')
-                    ->label('ID')
-                    ->sortable(),
-
                 TextColumn::make('user.nama')
-                    ->label('Kasir')
-                    ->sortable(),
+                    ->label('User'),
 
-                TextColumn::make('tanggal')
-                    ->date()
+                TextColumn::make('pembeli')
+                    ->label('Pembeli'),
+
+                TextColumn::make('penjualan_kode')
+                    ->label('Kode Penjualan'),
+
+                TextColumn::make('penjualan_tanggal')
                     ->label('Tanggal'),
-
-                TextColumn::make('total_harga')
-                    ->money('IDR')
-                    ->label('Total'),
             ])
             ->filters([
                 //
