@@ -10,11 +10,13 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Models\Barang;
 
 class PenjualanDetailRelationManager extends RelationManager
 {
@@ -24,9 +26,28 @@ class PenjualanDetailRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextInput::make('barang_id')
+                Select::make('barang_id')
+                    ->label('Barang')
+                    ->relationship('barang', 'barang_nama')
                     ->required()
-                    ->maxLength(255),
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $barang = Barang::find($state);
+                        if($barang) {
+                            $set('harga', $barang->harga_jual);
+                        }
+                    }),
+                TextInput::make('harga')
+                    ->label('Harga')
+                    ->numeric()
+                    ->required()
+                    ->disabled()
+                    ->dehydrated(),
+
+                TextInput::make('jumlah')
+                    ->label('Jumlah')
+                    ->numeric()
+                    ->required(),
             ]);
     }
 
@@ -35,19 +56,21 @@ class PenjualanDetailRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('barang_id')
             ->columns([
-                TextColumn::make('barang_id')
-                    ->searchable(),
+                TextColumn::make('barang.barang_nama')
+                    ->label('Barang'),
+                TextColumn::make('harga')
+                    ->label('Harga'),
+                TextColumn::make('jumlah')
+                    ->label('Jumlah'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 CreateAction::make(),
-                AssociateAction::make(),
             ])
             ->recordActions([
                 EditAction::make(),
-                DissociateAction::make(),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
