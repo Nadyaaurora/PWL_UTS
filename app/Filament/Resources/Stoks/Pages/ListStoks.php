@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Stoks\Pages;
 use App\Filament\Resources\Stoks\StokResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use App\Models\User;
 
 class ListStoks extends ListRecords
 {
@@ -13,7 +14,8 @@ class ListStoks extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+             ->visible(fn () => User::isAdminUser()),
         ];
     }
 }

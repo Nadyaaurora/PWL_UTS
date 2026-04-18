@@ -16,7 +16,6 @@ use Filament\Tables\Table;
 use UnitEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 
 class BarangResource extends Resource
 {
@@ -61,21 +60,6 @@ class BarangResource extends Resource
     }
 
     public static function canViewAny(): bool
-    {
-        return User::isAdminUser();
-    }
-
-    public static function canCreate(): bool
-    {
-        return User::isAdminUser();
-    }
-
-    public static function canEdit(Model $record): bool
-    {
-        return User::isAdminUser();
-    }
-
-    public static function canDelete(Model $record): bool
     {
         return User::isAdminUser();
     }
