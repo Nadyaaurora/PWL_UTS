@@ -25,6 +25,8 @@ class StokResource extends Resource
 
     protected static ?string $navigationLabel = 'Stok Barang';
     
+    protected static ?string $pluralLabel = 'Stok Barang';
+    
     protected static string|UnitEnum|null $navigationGroup = "Transaksi";
     
     public static function form(Schema $schema): Schema
