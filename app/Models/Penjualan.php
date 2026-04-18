@@ -31,4 +31,11 @@ class Penjualan extends Model
     {
         return $this->hasMany(PenjualanDetail::class, 'penjualan_id', 'penjualan_id');
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($penjualan) {
+            $penjualan->penjualanDetail()->delete();
+        });
+    }
 }

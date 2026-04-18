@@ -22,16 +22,20 @@ class PenjualanResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 
     protected static ?string $recordTitleAttribute = 'penjualan_kode';
-    
-    protected static ?string $navigationLabel = 'Data Penjualan'; 
 
-    protected static ?string $pluralModelLabel = 'Penjualan';
+    protected static ?string $navigationLabel = "Penjualan";
+
+    protected static ?string $pluralLabel = "Data Penjualan";
 
     protected static string|UnitEnum|null $navigationGroup = "Transaksi";
 
     public static function form(Schema $schema): Schema
     {
-        return PenjualanForm::configure($schema);
+        $record = null;
+        if (function_exists('request') && request()->route('record')) {
+            $record = Penjualan::find(request()->route('record'));
+        }
+        return PenjualanForm::configure($schema, $record);
     }
 
     public static function table(Table $table): Table
@@ -42,7 +46,7 @@ class PenjualanResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\PenjualanDetailRelationManager::class,
+            //
         ];
     }
 
