@@ -49,7 +49,12 @@ class PenjualanResource extends Resource
             //
         ];
     }
-
+    
+    public static function canViewAny(): bool
+    {
+        return true;
+    }
+    
     public static function getPages(): array
     {
         return [
@@ -58,4 +63,5 @@ class PenjualanResource extends Resource
             'edit' => EditPenjualan::route('/{record}/edit'),
         ];
     }
+
 }

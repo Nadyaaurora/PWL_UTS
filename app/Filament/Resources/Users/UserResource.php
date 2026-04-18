@@ -14,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
@@ -28,7 +29,7 @@ class UserResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static string|UnitEnum|null $navigationGroup = "Pengaturan";
-    
+
     protected static ?string $pluralLabel = "Data User";
 
     public static function form(Schema $schema): Schema
@@ -46,6 +47,22 @@ class UserResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function isAdminUser(): bool
+    {
+        $user = Auth::user();
+
+        if (! $user instanceof User) {
+            return false;
+        }
+
+        return $user->isAdmin();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return User::isAdminUser();
     }
 
     public static function getPages(): array
