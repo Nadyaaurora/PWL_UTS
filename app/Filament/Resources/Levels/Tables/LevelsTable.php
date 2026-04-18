@@ -16,8 +16,10 @@ class LevelsTable
             ->columns([
                 TextColumn::make('level_kode')
                     ->label('Kode')
+                    ->color('warning')
+                    ->badge()
                     ->searchable(),
-                    
+
                 TextColumn::make('level_nama')
                     ->label('Nama')
                     ->searchable(),

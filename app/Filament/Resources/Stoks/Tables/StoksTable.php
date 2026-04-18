@@ -15,19 +15,29 @@ class StoksTable
         return $table
             ->columns([
                 TextColumn::make('supplier.supplier_nama')
-                    ->label('Supplier'),
+                    ->label('Supplier')
+                    ->searchable(),
 
                 TextColumn::make('barang.barang_nama')
-                    ->label('Barang'),
+                    ->label('Barang')
+                    ->color('secondary')
+                    ->badge()
+                    ->searchable(),
 
                 TextColumn::make('user.nama')
-                    ->label('Kasir'),
+                    ->label('Kasir')
+                    ->searchable(),
 
                 TextColumn::make('stok_tanggal')
-                    ->label('Tanggal'),
+                    ->label('Tanggal')
+                    ->dateTime('d-m-Y H:i:s')
+                    ->sortable()
+                    ->color('warning')
+                    ->searchable(),
 
                 TextColumn::make('stok_jumlah')
-                    ->label('Jumlah'),
+                    ->label('Jumlah')
+                    ->color('success'),
             ])
             ->filters([
                 //

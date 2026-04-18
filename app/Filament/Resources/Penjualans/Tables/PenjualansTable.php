@@ -15,19 +15,30 @@ class PenjualansTable
         return $table
             ->columns([
                 TextColumn::make('user.nama')
-                    ->label('Kasir'),
+                    ->label('Kasir')
+                    ->searchable(),
 
                 TextColumn::make('pembeli')
-                    ->label('Pembeli'),
+                    ->label('Pembeli')
+                    ->color('info')
+                    ->searchable(),
 
                 TextColumn::make('penjualan_kode')
-                    ->label('Kode Penjualan'),
+                    ->label('Kode Penjualan')
+                    ->color('gray')
+                    ->searchable()
+                    ->badge(),
 
                 TextColumn::make('penjualan_tanggal')
-                    ->label('Tanggal'),
+                    ->label('Tanggal')
+                    ->dateTime('d-m-Y H:i:s')
+                    ->searchable()
+                    ->sortable(),
                     
                 TextColumn::make('total')
                     ->label('Total')
+                    ->sortable()
+                    ->color('danger')
                     ->getStateUsing(function ($record) {
                         return $record->penjualanDetail->sum(function ($item) {
                             return $item->harga * $item->jumlah;
