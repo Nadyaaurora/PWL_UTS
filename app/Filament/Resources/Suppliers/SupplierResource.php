@@ -9,6 +9,7 @@ use App\Filament\Resources\Suppliers\Schemas\SupplierForm;
 use App\Filament\Resources\Suppliers\Tables\SuppliersTable;
 use App\Models\Supplier;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -24,6 +25,8 @@ class SupplierResource extends Resource
     protected static ?string $recordTitleAttribute = 'supplier_nama';
 
     protected static ?string $navigationLabel = 'Data Supplier';
+
+    protected static string|UnitEnum|null $navigationGroup = "Kelola Data";
 
     public static function form(Schema $schema): Schema
     {

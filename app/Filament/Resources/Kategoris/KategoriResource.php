@@ -9,6 +9,7 @@ use App\Filament\Resources\Kategoris\Schemas\KategoriForm;
 use App\Filament\Resources\Kategoris\Tables\KategorisTable;
 use App\Models\Kategori;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -25,6 +26,8 @@ class KategoriResource extends Resource
     protected static ?string $navigationLabel = 'Kategori'; 
 
     protected static ?string $pluralModelLabel = 'Kategori';
+
+    protected static string|UnitEnum|null $navigationGroup = "Kelola Data";
 
     public static function form(Schema $schema): Schema
     {
